@@ -1,0 +1,11 @@
+node_modules
+dist
+atithisetu.db
+atithisetu.db-journal
+.env
+.git
+.gitignore
+Dockerfile
+.dockerignore
+npm-debug.log
+README.md
