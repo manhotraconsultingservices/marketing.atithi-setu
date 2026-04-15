@@ -12,7 +12,7 @@ export const ChatBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'model', text: 'Namaste! I am AtithiBot. How can I help you grow your restaurant business today?' }
+    { role: 'model', text: 'Namaste! I am AtithiSetu BOT. How can I help you grow your restaurant business today?' }
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -58,7 +58,7 @@ export const ChatBot: React.FC = () => {
                   <Bot size={20} />
                 </div>
                 <div>
-                  <h3 className="font-serif font-bold text-lg leading-tight">AtithiBot</h3>
+                  <h3 className="font-serif font-bold text-lg leading-tight">AtithiSetu BOT</h3>
                   <p className="text-xs opacity-80">Online | Hospitality Expert</p>
                 </div>
               </div>
@@ -85,7 +85,7 @@ export const ChatBot: React.FC = () => {
                 <div className="flex justify-start">
                   <div className="flex gap-2 items-center bg-white p-3 rounded-2xl border border-gold/10 shadow-sm">
                     <Loader2 size={16} className="animate-spin text-saffron" />
-                    <span className="text-xs text-muted">AtithiBot is thinking...</span>
+                    <span className="text-xs text-muted">AtithiSetu BOT is thinking...</span>
                   </div>
                 </div>
               )}

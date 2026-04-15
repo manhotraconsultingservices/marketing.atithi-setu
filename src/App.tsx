@@ -199,7 +199,7 @@ const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
         </span>
       </Link>
       <div className="hidden md:flex items-center gap-6">
-        {['Features', 'For Whom', 'Benefits', 'ROI', 'How it Works', 'Pricing'].map((item) => {
+        {['Features', 'For Whom', 'Benefits', 'ROI', 'How it Works'].map((item) => {
           const href = `#${item.toLowerCase().replace(/\s+/g, '-')}`;
           return isHome ? (
             <a 
@@ -565,59 +565,6 @@ const Features = () => (
   </section>
 );
 
-const Pricing = ({ onOpenModal }: { onOpenModal: () => void }) => (
-  <section id="pricing" className="py-20 px-6 bg-grid-pattern">
-    <div className="max-w-7xl mx-auto">
-      <div className="max-w-2xl mx-auto text-center mb-12">
-        <h2 className="font-serif text-5xl font-bold text-deep tracking-tight">Simple, <span className="italic text-saffron">Transparent</span> Pricing.</h2>
-      </div>
-
-      <div className="grid md:grid-cols-2 max-w-4xl mx-auto gap-6">
-        <div className="bg-deep p-10 rounded-[40px] border border-saffron shadow-2xl relative overflow-hidden">
-          <div className="font-mono text-[9px] text-white/40 uppercase tracking-widest mb-4">Growth Plan</div>
-          <div className="flex items-baseline gap-2 mb-8">
-            <span className="font-serif text-6xl font-bold text-cream">₹ 1999</span>
-            <span className="text-white/40 text-sm">/ month</span>
-          </div>
-          <ul className="space-y-4 mb-10">
-            {['Smart Menu', 'Unlimited Tables', 'Live KDS', 'Reservations', 'Staff Attendance', 'Alerts', 'etc'].map(item => (
-              <li key={item} className="flex items-center gap-3 text-xs text-white/70">
-                <CheckCircle2 size={14} className="text-saffron" /> {item}
-              </li>
-            ))}
-          </ul>
-          <button 
-            onClick={onOpenModal}
-            className="w-full bg-saffron text-white py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-white hover:text-deep transition-all"
-          >
-            Get Started
-          </button>
-        </div>
-
-        <div className="bg-white p-10 rounded-[40px] border border-gold/10 shadow-xl flex flex-col justify-between">
-          <div>
-            <div className="font-mono text-[9px] text-muted uppercase tracking-widest mb-4">Enterprise</div>
-            <div className="font-serif text-5xl font-bold text-deep mb-8">Custom</div>
-            <ul className="space-y-4 mb-10">
-              {['Multi-Branch', 'Super Admin Dashboard', 'On-Premise Option', 'Custom Integrations'].map(item => (
-                <li key={item} className="flex items-center gap-3 text-xs text-deep/60">
-                  <CheckCircle2 size={14} className="text-sage" /> {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <button 
-            onClick={onOpenModal}
-            className="w-full bg-deep text-white py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-saffron transition-all"
-          >
-            Talk to Sales
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 const Footer = () => (
   <footer className="bg-deep text-white/30 py-12 px-6 border-t border-white/5">
     <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
@@ -663,7 +610,6 @@ const HomePage = ({ onOpenModal }: { onOpenModal: () => void }) => (
     <Benefits />
     <ROITable />
     <HowItWorks />
-    <Pricing onOpenModal={onOpenModal} />
     <section className="bg-saffron py-12 px-6">
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="font-serif text-4xl md:text-5xl font-black text-white leading-tight tracking-tight mb-8">

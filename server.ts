@@ -4,11 +4,15 @@ import path from "path";
 import { fileURLToPath } from "url";
 import Database from "better-sqlite3";
 import nodemailer from "nodemailer";
+import { GoogleGenAI } from "@google/genai";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const db = new Database("atithisetu.db");
+import fs from "fs";
+const dataDir = path.join(__dirname, "data");
+if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+const db = new Database(path.join(dataDir, "atithisetu.db"));
 
 // Initialize DB
 db.exec(`
@@ -111,6 +115,60 @@ async function startServer() {
     } catch (err) {
       console.error("Lead error:", err);
       res.status(500).json({ error: "Failed to save lead" });
+    }
+  });
+
+  // AI Chat Route — Gemini call stays on the server so the API key is never exposed to the browser
+  app.post("/api/chat", async (req, res) => {
+    const { message, history } = req.body;
+    if (!message) {
+      res.status(400).json({ error: "message is required" });
+      return;
+    }
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      res.status(500).json({ error: "GEMINI_API_KEY is not configured on the server" });
+      return;
+    }
+    try {
+      const ai = new GoogleGenAI({ apiKey });
+      const SYSTEM_INSTRUCTION = `
+You are "AtithiSetu BOT", the AI assistant for AtithiSetu ERP.
+AtithiSetu is a SaaS ERP for Hospitality businesses (Restaurants, Hotels, Bars, Spas, Event Venues.).
+
+Your goals:
+1. **Onboarding**: Help business owners understand how to get started. Explain the steps: Register -> Build Menu -> Set up Tables -> Onboard Team -> Go Live.
+2. **Lead Generation**: If they show interest, ask for their name, restaurant/business name, and email. Tell them a representative will contact them.
+3. **Support/Complaints**: If they have a complaint, ask for their email and a description of the issue.
+
+Key Industry Knowledge:
+- **Restaurants & Fine Dining**: Focus on timing, real-time menu updates (remove Wagyu ribeye instantly if out), QR scanners to reduce "waiter-hunting", and staff upsell tracking.
+- **Hotels & Resorts**: Concierge in pocket, bedside QR for room service, housekeeping sync to turn rooms faster.
+- **Bars & Nightclubs**: QR ordering from crowded booths, staff focus on crafting drinks instead of navigating noisy crowds.
+- **Cafes & Bakeries**: QR Pre-order & Pick-up for 25% faster throughput during morning rushes.
+- **Food Trucks**: Digital menus to save space and lower printing costs.
+- **Event Venues**: Mobile ordering for seats to reduce concourse congestion.
+
+Core Advantages:
+- **For Customers**: Visual appeal (high-res photos), safety/hygiene (contactless), language accessibility (one-click translation).
+- **For Business**: Dynamic pricing (Happy Hour), staff retention (less grunt work), data insights (popular items/times).
+
+Philosophy: "The transition to digital menus isn't just an IT upgrade; it's a hospitality upgrade. It frees your staff to be hosts, not just order-takers."
+
+Tone: Professional, hospitable, helpful, and efficient. Use Indian hospitality context where appropriate (e.g., "Atithi Devo Bhava").
+`;
+      const response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: [
+          ...(history || []),
+          { role: "user", parts: [{ text: message }] }
+        ],
+        config: { systemInstruction: SYSTEM_INSTRUCTION, temperature: 0.7 },
+      });
+      res.json({ reply: response.text });
+    } catch (err) {
+      console.error("Gemini error:", err);
+      res.status(500).json({ error: "AI service unavailable" });
     }
   });
 

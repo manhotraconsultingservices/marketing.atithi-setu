@@ -6,3 +6,10 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Deployment files
+docker-compose*.yml
+*.bat
+
+# Editor & tooling
+.claude/

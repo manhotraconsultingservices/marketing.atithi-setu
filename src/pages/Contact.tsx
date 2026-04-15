@@ -34,7 +34,7 @@ export const Contact = () => {
               </div>
               <div>
                 <p className="text-[10px] font-mono uppercase tracking-widest text-muted">Call Us</p>
-                <p className="font-bold text-deep">+91 98765 43210</p>
+                <p className="font-bold text-deep">+91 70111 89371</p>
               </div>
             </div>
 
@@ -44,7 +44,7 @@ export const Contact = () => {
               </div>
               <div>
                 <p className="text-[10px] font-mono uppercase tracking-widest text-muted">Visit Us</p>
-                <p className="font-bold text-deep">Hospitality Hub, Bangalore, India</p>
+                <p className="font-bold text-deep">Gurgaon, Haryana, India</p>
               </div>
             </div>
           </div>

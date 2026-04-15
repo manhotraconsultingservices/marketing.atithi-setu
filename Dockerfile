@@ -4,28 +4,29 @@ FROM node:20
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-# Note: better-sqlite3 will be compiled during this step
+# Install ALL dependencies (including devDeps like tsx, vite, typescript)
+# NODE_ENV must NOT be production here, otherwise npm skips devDependencies
 RUN npm install
 
 # Copy the rest of the application code
 COPY . .
 
-# Build arguments for environment variables needed at build time
+# Build arguments for environment variables
 ARG GEMINI_API_KEY
 ENV GEMINI_API_KEY=$GEMINI_API_KEY
 
-# Build the frontend assets
+# Build the frontend assets with Vite
 RUN npm run build
 
-# Expose the port the app runs on
-EXPOSE 3000
-
-# Set environment variable to production
+# Set production mode AFTER build so devDeps were available during build
 ENV NODE_ENV=production
 
-# Command to run the application
+# Expose the port
+EXPOSE 3000
+
+# Start the server using tsx (required because tsconfig has noEmit:true,
+# meaning tsc cannot compile server.ts to JS)
 CMD ["npm", "start"]
