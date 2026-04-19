@@ -23,7 +23,7 @@ compatibility_flags   = ["nodejs_compat"]
 [[d1_databases]]
 binding       = "DB"
 database_name = "atithi-setu-db"
-database_id   = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_id   = "baeedb61-faae-40c4-8267-ecf7d3faf75f"
 
 # ─── Environment Variables ────────────────────────────────────────────────────
 #
