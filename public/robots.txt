@@ -1,0 +1,24 @@
+# ═══════════════════════════════════════════════════════════════
+#  AtithiSetu — robots.txt
+#  https://atithi-setu.com
+# ═══════════════════════════════════════════════════════════════
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# AI crawlers — allow (they drive brand discovery in 2026)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Sitemap
+Sitemap: https://atithi-setu.com/sitemap.xml
