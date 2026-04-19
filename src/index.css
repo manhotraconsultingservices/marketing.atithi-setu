@@ -1,147 +1,187 @@
 @import "tailwindcss";
 
 @theme {
-  /* ─── Typography ─── */
+  /* ─── Typography ──────────────────────────────────── */
   --font-sans:  "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
   --font-mono:  "DM Mono", "Fira Code", monospace;
 
-  /* ─── Brand Palette ─── */
-  --color-saffron:    #E8721C;
-  --color-saffron-dk: #C45A10;
-  --color-deep:       #0D0A07;
-  --color-cream:      #FAF5EE;
-  --color-ivory:      #FFFDF9;
-  --color-gold:       #C9952A;
-  --color-terracotta: #B85C38;
-  --color-sage:       #4A7A47;
-  --color-muted:      #7A6A58;
-  --color-border:     #E8DDD0;
+  /* ─── Core Brand ──────────────────────────────────── */
+  --color-saffron:     #E8721C;   /* Primary — CTA, active */
+  --color-saffron-lt:  #FF9240;   /* Light — hover glow, gradients */
+  --color-saffron-dk:  #C45A10;   /* Dark — pressed state */
+
+  /* ─── Gold Tier ───────────────────────────────────── */
+  --color-gold:        #C9952A;   /* Secondary accent */
+  --color-gold-lt:     #F0B429;   /* Bright gold — star ratings, highlights */
+  --color-amber:       #F5A623;   /* Warm highlight — badges */
+
+  /* ─── Dark Scale ──────────────────────────────────── */
+  --color-deep:        #100C08;   /* Richest dark — primary dark bg */
+  --color-midnight:    #1E1208;   /* Mid dark — gradient layer */
+  --color-charcoal:    #2A1F14;   /* Lifted dark — card on dark */
+
+  /* ─── Light Scale ─────────────────────────────────── */
+  --color-cream:       #FAF5EE;   /* Base background */
+  --color-ivory:       #FFFDF9;   /* Card/elevated surface */
+  --color-champagne:   #FBF0DC;   /* Warm card accent */
+  --color-parchment:   #F3EAD8;   /* Section divider tint */
+
+  /* ─── Semantic ────────────────────────────────────── */
+  --color-muted:       #7A6A58;   /* Body text on light */
+  --color-muted-lt:    #A8957E;   /* Placeholder / hints */
+  --color-border:      #E8DDD0;   /* Subtle dividers */
+  --color-border-dk:   #D4C4AE;   /* Stronger border */
+  --color-sage:        #4A7A47;   /* Success / positive */
+  --color-terracotta:  #B85C38;   /* Warning / error tint */
 }
 
-/* ─── Base ─────────────────────────────────────────────────── */
+/* ─── Base ──────────────────────────────────────────────────── */
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-  }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
   body {
     @apply bg-cream text-deep font-sans antialiased;
-    font-feature-settings: "kern" 1, "liga" 1;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   }
 
   ::selection {
-    background-color: rgb(232 114 28 / 0.25);
-    color: #0D0A07;
+    background: rgb(232 114 28 / 0.22);
+    color: #100C08;
   }
 
-  h1, h2, h3, h4 {
-    text-wrap: balance;
-  }
+  h1, h2, h3, h4, h5 { text-wrap: balance; }
+  p { text-wrap: pretty; }
 }
 
 /* ─── Utilities ─────────────────────────────────────────────── */
 @layer utilities {
-  /* Glass morphism card */
+
+  /* ── Glass variants ── */
   .glass {
-    @apply bg-white/75 backdrop-blur-xl border border-white/30 shadow-2xl;
+    @apply bg-white/80 backdrop-blur-2xl border border-white/40 shadow-2xl;
+  }
+  .glass-dark {
+    background: rgb(255 255 255 / 0.05);
+    @apply backdrop-blur-xl border border-white/10 shadow-2xl;
+  }
+  .glass-warm {
+    background: linear-gradient(135deg, rgb(251 240 220 / 0.9) 0%, rgb(255 253 249 / 0.8) 100%);
+    @apply backdrop-blur-xl border border-amber/20 shadow-xl;
   }
 
-  /* Gradient text — saffron to gold */
+  /* ── Gradient text ── */
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, #E8721C 0%, #C9952A 100%);
+    background-image: linear-gradient(135deg, #FF9240 0%, #E8721C 40%, #C9952A 100%);
+  }
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #F0B429 0%, #C9952A 100%);
   }
 
-  /* Subtle dot-grid background */
+  /* ── Section backgrounds ── */
   .bg-grid-pattern {
-    background-image: radial-gradient(circle at 1px 1px, rgb(232 114 28 / 0.06) 1px, transparent 0);
-    background-size: 24px 24px;
+    background-image: radial-gradient(circle at 1px 1px, rgb(232 114 28 / 0.07) 1px, transparent 0);
+    background-size: 28px 28px;
+  }
+  .bg-dot-pattern {
+    background-image: radial-gradient(circle, rgb(201 149 42 / 0.12) 1px, transparent 1px);
+    background-size: 20px 20px;
   }
 
-  /* Noise texture overlay for premium feel */
-  .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  /* ── Rich dark section ── */
+  .bg-velvet {
+    background: radial-gradient(ellipse 90% 60% at 20% 30%, #2A1F14 0%, #1E1208 40%, #100C08 100%);
+  }
+  .bg-velvet-center {
+    background: radial-gradient(ellipse 80% 70% at 50% 40%, #2A1808 0%, #1A0E05 50%, #100C08 100%);
   }
 
-  /* Scrollbar — hidden */
+  /* ── Gradient borders ── */
+  .card-gradient-border {
+    position: relative;
+    background: white;
+  }
+  .card-gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #E8721C, #C9952A, #E8721C);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .card-gradient-border:hover::before { opacity: 1; }
+
+  /* ── Glow effects ── */
+  .glow-saffron {
+    box-shadow: 0 0 40px rgb(232 114 28 / 0.3), 0 0 80px rgb(232 114 28 / 0.1);
+  }
+  .glow-gold {
+    box-shadow: 0 0 30px rgb(201 149 42 / 0.25), 0 0 60px rgb(201 149 42 / 0.1);
+  }
+
+  /* ── Scrollbar ── */
   .scrollbar-hide::-webkit-scrollbar { display: none; }
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-
-  /* Thin custom scrollbar */
-  .scrollbar-thin::-webkit-scrollbar { width: 4px; }
+  .scrollbar-thin::-webkit-scrollbar { width: 3px; }
   .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
   .scrollbar-thin::-webkit-scrollbar-thumb { @apply bg-gold/30 rounded-full; }
-
-  /* Shimmer animation for loading states */
-  .shimmer {
-    background: linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 0.4) 50%, transparent 100%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-  }
 }
 
-/* ─── Animations ────────────────────────────────────────────── */
-
-/* Float — hero cards */
+/* ─── Keyframes ─────────────────────────────────────────────── */
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33%       { transform: translateY(-12px) rotate(0.5deg); }
-  66%       { transform: translateY(-6px) rotate(-0.3deg); }
+  33%       { transform: translateY(-14px) rotate(0.5deg); }
+  66%       { transform: translateY(-7px) rotate(-0.3deg); }
 }
-
 @keyframes float-delayed {
   0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
+  50%       { transform: translateY(-11px); }
 }
-
 @keyframes float-slow {
-  0%, 100% { transform: translateY(0px) translateX(0px); }
-  50%       { transform: translateY(-8px) translateX(4px); }
+  0%, 100% { transform: translateY(0px) translateX(0); }
+  50%       { transform: translateY(-8px) translateX(5px); }
 }
-
-/* Shimmer */
 @keyframes shimmer {
   0%   { background-position: -200% center; }
   100% { background-position:  200% center; }
 }
-
-/* Pulse glow */
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgb(232 114 28 / 0.3); }
-  50%       { box-shadow: 0 0 0 12px rgb(232 114 28 / 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgb(232 114 28 / 0.4), 0 8px 32px rgb(232 114 28 / 0.25); }
+  50%       { box-shadow: 0 0 0 8px rgb(232 114 28 / 0), 0 8px 40px rgb(232 114 28 / 0.35); }
 }
-
-/* Ticker — for the trust bar */
 @keyframes ticker {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
-/* Fade up entrance */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
-/* Draw underline */
-@keyframes drawLine {
-  from { width: 0; }
-  to   { width: 100%; }
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(90px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(90px) rotate(-360deg); }
+}
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50%       { transform: scale(1.15); opacity: 0.9; }
 }
 
-/* Notification slide-in */
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(24px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-/* ─── Animation classes ─ */
-.animate-float         { animation: float 7s ease-in-out infinite; }
-.animate-float-delayed { animation: float-delayed 9s ease-in-out infinite 0.5s; }
-.animate-float-slow    { animation: float-slow 11s ease-in-out infinite 1s; }
-.animate-pulse-glow    { animation: pulse-glow 2s ease-in-out infinite; }
-.animate-ticker        { animation: ticker 28s linear infinite; }
-.animate-fade-up       { animation: fadeUp 0.7s ease-out forwards; }
-.animate-slide-right   { animation: slideInRight 0.5s ease-out forwards; }
+/* ─── Animation classes ── */
+.animate-float          { animation: float 7s ease-in-out infinite; }
+.animate-float-delayed  { animation: float-delayed 9s ease-in-out infinite 0.8s; }
+.animate-float-slow     { animation: float-slow 11s ease-in-out infinite 1.5s; }
+.animate-pulse-glow     { animation: pulse-glow 2.5s ease-in-out infinite; }
+.animate-ticker         { animation: ticker 30s linear infinite; }
+.animate-fade-up        { animation: fadeUp 0.7s ease-out forwards; }
+.animate-breathe        { animation: breathe 4s ease-in-out infinite; }
