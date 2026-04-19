@@ -1,0 +1,5 @@
+# Cloudflare Pages — SPA routing
+# All routes that don't match a static file or a Function
+# are served index.html so React Router handles them client-side.
+# Functions at /api/* always take priority over this rule.
+/* /index.html 200

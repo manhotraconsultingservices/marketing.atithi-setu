@@ -1,0 +1,39 @@
+# ═══════════════════════════════════════════════════════════════
+#  AtithiSetu — Cloudflare Pages Configuration
+#  Docs: https://developers.cloudflare.com/pages/
+# ═══════════════════════════════════════════════════════════════
+
+name                  = "marketing-atithi-setu"
+pages_build_output_dir = "dist"
+compatibility_date    = "2024-09-23"
+compatibility_flags   = ["nodejs_compat"]
+
+# ─── D1 Database ─────────────────────────────────────────────────────────────
+#
+#  SETUP STEPS:
+#  1. Go to dash.cloudflare.com → Workers & Pages → D1
+#  2. Click "Create database" → name it: atithi-setu-db → click Create
+#  3. Copy the Database ID shown on the database page
+#  4. Replace REPLACE_WITH_YOUR_D1_DATABASE_ID below with that ID
+#  5. Push this file to GitHub — Pages will redeploy automatically
+#
+#  Then run the schema migration (one time):
+#    npx wrangler d1 execute atithi-setu-db --file=./schema.sql --remote
+#
+[[d1_databases]]
+binding       = "DB"
+database_name = "atithi-setu-db"
+database_id   = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+# ─── Environment Variables ────────────────────────────────────────────────────
+#
+#  Set these as SECRETS in the Cloudflare Dashboard:
+#  Pages project → Settings → Environment Variables → Add variable
+#
+#  Variable Name        Value
+#  ─────────────────────────────────────────────────────────────
+#  GEMINI_API_KEY       Your Google AI Studio key
+#  RESEND_API_KEY       Your Resend.com API key  (sign up free at resend.com)
+#  NOTIFICATION_EMAIL   manhotraconsultingservices@gmail.com
+#
+#  ⚠️  Never put real API keys in this file — always use the dashboard.

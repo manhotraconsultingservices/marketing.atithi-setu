@@ -13,3 +13,6 @@ docker-compose*.yml
 
 # Editor & tooling
 .claude/
+
+# Wrangler local state
+.wrangler/
