@@ -12,7 +12,7 @@ export const ChatBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'model', text: 'Namaste! I am AtithiSetu BOT. How can I help you grow your restaurant business today?' }
+    { role: 'model', text: 'Namaste! I am AtithiSetu BOT. How can I help you grow your hospitality business today — restaurant, hotel, resort, café or more?' }
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import {
   ChefHat, LayoutDashboard, Smartphone, BarChart3, CreditCard,
   Calendar, Users, Bell, ShieldCheck, ArrowRight, CheckCircle2,
-  Zap, Utensils, Hotel, Wine, Coffee, Truck, Ticket, Sparkles,
+  Zap, Utensils, Hotel, Palmtree, Wine, Coffee, Truck, Ticket, Sparkles,
   Eye, Shield, Languages, DollarSign, UserCheck, Database,
   X, Send, Star, TrendingUp, Clock, Menu, PhoneCall, ChevronRight,
   Award, Cpu, QrCode, Receipt, MapPin,
@@ -283,19 +283,19 @@ const Hero = ({ onOpenModal }: { onOpenModal: () => void }) => {
               style={{ background: 'linear-gradient(135deg, rgb(232 114 28 / 0.1) 0%, rgb(201 149 42 / 0.08) 100%)', borderColor: 'rgb(232 114 28 / 0.25)' }}>
               <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ background: '#E8721C' }} />
               <span className="font-mono text-[10px] uppercase tracking-widest text-saffron font-bold">
-                India's #1 Hotel & Restaurant Software
+                India's #1 Hotel, Resort & Restaurant Software
               </span>
             </motion.div>
 
             <motion.h1 variants={fadeUp}
               className="font-serif text-[2.8rem] sm:text-6xl lg:text-[4rem] xl:text-[4.5rem] font-black leading-[0.88] tracking-tighter text-deep mb-6">
-              Hotel &amp;<br />Restaurant<br />
+              Hotel, Resort<br />&amp; Restaurant<br />
               <span className="text-gradient italic">Software</span><br />
               <span className="text-deep/80 font-bold text-[0.72em]">That Runs Itself.</span>
             </motion.h1>
 
             <motion.p variants={fadeUp} className="text-base sm:text-lg text-muted max-w-[480px] mb-8 leading-relaxed">
-              India's most complete hospitality management platform — QR ordering, live kitchen displays, GST billing, staff management, and deep analytics. One elegant system.
+              India's most complete hospitality management platform — QR ordering, live kitchen displays, multi-outlet POS, spa &amp; activity bookings, GST billing, and deep analytics. Built for restaurants, hotels, and resorts.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mb-7">
@@ -495,7 +495,7 @@ const Features = () => {
           </motion.span>
           <motion.h2 id="features-heading" variants={fadeUp}
             className="font-serif text-4xl sm:text-5xl font-bold text-deep mt-3 tracking-tight max-w-2xl">
-            Everything your hotel &amp; restaurant<br />
+            Everything your hotel, resort &amp; restaurant<br />
             <span className="italic text-gradient">needs to dominate.</span>
           </motion.h2>
           <motion.p variants={fadeUp} className="text-sm text-muted mt-4 max-w-xl leading-relaxed">
@@ -538,7 +538,8 @@ const Features = () => {
 const ForWhom = () => {
   const sectors = [
     { icon: Utensils, title: 'Restaurants & Fine Dining', desc: 'Eliminate "waiter-hunting" and order errors. Real-time menu updates mean you can remove the Wagyu ribeye the moment it sells out.', bullets: ['QR scanners cut table-to-kitchen time by 40%', 'Live availability prevents ordering unavailable items'] },
-    { icon: Hotel, title: 'Hotels & Resorts', desc: "Put the concierge in your guest's pocket. From room service to housekeeping sync — fully integrated.", bullets: ['Bedside QR ordering with zero phone calls', 'Housekeeping sync reduces room turnover time by 30%'] },
+    { icon: Hotel, title: 'Hotels & Boutique Stays', desc: "Put the concierge in every guest's pocket. Bedside QR for room service, housekeeping sync, express check-out, and integrated F&B billing — one elegant system.", bullets: ['Bedside QR ordering with zero phone calls', 'Housekeeping sync cuts room turnover by 30%', 'Unified F&B + PMS — no more double-entry'] },
+    { icon: Palmtree, title: 'Resorts & Wellness Retreats', desc: 'One platform for your entire resort — multi-outlet F&B (pool bar, fine-dining, café), spa & activity bookings, wedding/MICE events, and all-inclusive meal-plan billing.', bullets: ['Unified POS across every outlet & shared inventory', 'Spa, activities & excursions — booked in seconds', 'Wedding / MICE event & banquet management', 'AI / MAP / HAP all-inclusive meal-plan billing'] },
     { icon: Wine, title: 'Bars, Pubs & Nightclubs', desc: 'Loud music and crowds make verbal orders a nightmare. Let your patrons order another round without fighting for the bar.', bullets: ['Booth QR ordering increases drink volume by 20%', 'Staff focus on crafting — not navigating crowds'] },
     { icon: Coffee, title: 'Cafés & Bakeries', desc: 'Solve the morning rush. Pre-ordering and digital pick-up queues keep your line moving and regulars happy.', bullets: ['QR pre-order & pick-up for 25% faster throughput', 'Loyalty integration — reward regulars automatically'] },
     { icon: Truck, title: 'Food Trucks', desc: 'Every inch of space counts. Digital menus replace bulky boards. Update your location and menu on the fly.', bullets: ['Zero printing costs — update menu in seconds', 'GPS-linked menu shows real-time truck location'] },
@@ -570,7 +571,7 @@ const ForWhom = () => {
             Tailored for every<br /><span className="italic text-gradient">hospitality sector.</span>
           </motion.h2>
           <motion.p variants={fadeUp} className="text-sm max-w-lg mt-4 leading-relaxed" style={{ color: 'rgb(255 255 255 / 0.4)' }}>
-            From high-traffic bistros to luxury resorts — our hotel and restaurant software adapts to your specific operation.
+            From high-traffic bistros to beach resorts, hill stations and wellness retreats — our hotel, resort and restaurant software adapts to every hospitality operation.
           </motion.p>
         </motion.div>
 
@@ -581,7 +582,7 @@ const ForWhom = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ delay: i * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="group p-8 rounded-3xl transition-all duration-300 cursor-default"
+              className={`group p-8 rounded-3xl transition-all duration-300 cursor-default${i === sectors.length - 1 ? ' lg:col-start-2' : ''}`}
               style={{
                 background: 'linear-gradient(135deg, rgb(255 255 255 / 0.05) 0%, rgb(255 255 255 / 0.02) 100%)',
                 border: '1px solid rgb(255 255 255 / 0.08)',
@@ -770,7 +771,8 @@ const Benefits = () => {
 const ROITable = () => {
   const rows = [
     { cat: 'Restaurants & Fine Dining', pain: 'Waiter fatigue & order timing errors', sol: 'QR ordering + live KDS', roi: '+15% table turnover' },
-    { cat: 'Hotels & Resorts', pain: 'Slow room service, manual coordination', sol: 'Bedside QR + housekeeping sync', roi: '+30% room turnaround' },
+    { cat: 'Hotels & Boutique Stays', pain: 'Slow room service, manual coordination', sol: 'Bedside QR + housekeeping sync', roi: '+30% room turnaround' },
+    { cat: 'Resorts & Wellness Retreats', pain: 'Fragmented F&B, spa & activity silos', sol: 'Unified multi-outlet POS + bookings', roi: '+35% F&B margin, −20% labour' },
     { cat: 'Bars, Pubs & Nightclubs', pain: 'Order errors in loud, crowded venues', sol: 'Direct QR ordering by table', roi: '+20% drink volume' },
     { cat: 'Cafés & Bakeries', pain: 'Morning rush queues drive away customers', sol: 'QR pre-order & pick-up flow', roi: '+25% peak throughput' },
     { cat: 'Food Trucks', pain: 'Bulky physical menus, frequent changes', sol: 'Dynamic digital menu', roi: 'Zero printing costs' },
@@ -1023,7 +1025,7 @@ const Footer = () => {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8"
           style={{ borderTop: '1px solid rgb(255 255 255 / 0.06)' }}>
           <p className="font-mono text-[11px] uppercase tracking-widest" style={{ color: 'rgb(255 255 255 / 0.2)' }}>
-            © {year} AtithiSetu · Hotel & Restaurant Software · India
+            © {year} AtithiSetu · Hotel, Resort & Restaurant Software · India
           </p>
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-sage rounded-full animate-pulse" />
