@@ -44,7 +44,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     if (env.RESEND_API_KEY && env.NOTIFICATION_EMAIL) {
       const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
-      await fetch('https://api.resend.com/emails', {
+      const emailRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${env.RESEND_API_KEY}`,
@@ -90,6 +90,11 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 </html>`,
         }),
       });
+
+      if (!emailRes.ok) {
+        const errBody = await emailRes.text();
+        console.error(`[/api/leads] Resend error ${emailRes.status}: ${errBody}`);
+      }
     }
 
     return Response.json({ success: true });
